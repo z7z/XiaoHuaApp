@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "XiaoHuaVC.h"
 @interface AppDelegate ()
             
 
@@ -20,6 +20,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    XiaoHuaVC * rvc =[[XiaoHuaVC alloc] init];
+    rvc.XH_UrlStr = @"http://www.xiaohuabolan.com/api/jokes.json?page=";
+    
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:rvc];
+    
+    self.window.rootViewController = nvc ;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
