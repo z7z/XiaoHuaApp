@@ -39,7 +39,7 @@
     _xiaoHuaTable.delegate   = self ;
     _xiaoHuaTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_xiaoHuaTable];
-    [self loadXiaoHuaWithPage:1];
+    [self loadXiaoHuaWithPage:_page];
 }
 
 - (void)loadXiaoHuaWithPage:(int)page{

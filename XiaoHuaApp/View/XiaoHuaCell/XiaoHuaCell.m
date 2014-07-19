@@ -17,7 +17,8 @@
     self.XH_content2.font = [UIFont systemFontOfSize:16];
     self.XH_content2.lineBreakMode = NSLineBreakByWordWrapping;
     self.XH_content2.numberOfLines = 0;
-    self.autoresizingMask = 0;
+    self.XH_content2.backgroundColor = [UIColor redColor];
+//    self.autoresizingMask = 0;
     [self.XH_content.superview addSubview:self.XH_content2];
 }
 

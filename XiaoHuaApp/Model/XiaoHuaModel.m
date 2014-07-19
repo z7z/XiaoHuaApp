@@ -28,7 +28,7 @@
 //      接口有问题
     if (![self.XH_picture_url isKindOfClass:[NSNull class]]
                 &&![self.XH_picture_url isEqualToString:@""]) {
-        NSLog(@"beng %@",self.XH_picture_url);
+        // NSLog(@"beng %@",self.XH_picture_url);
         float x = 286.0 / self.XH_picture_width.floatValue ;
         height = height + x * self.XH_picture_height.floatValue ;
     }
