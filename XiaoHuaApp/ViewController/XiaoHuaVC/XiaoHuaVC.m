@@ -10,6 +10,7 @@
 #import "RequestManager.h"
 #import "XiaoHuaModel.h"
 #import "XiaoHuaCell.h"
+#import "UIImageView+WebCache.h"
 @interface XiaoHuaVC ()
 
 @end
@@ -21,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _page = 1;
     }
     return self;
 }
@@ -35,6 +37,7 @@
     _xiaoHuaTable = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _xiaoHuaTable.dataSource = self ;
     _xiaoHuaTable.delegate   = self ;
+    _xiaoHuaTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_xiaoHuaTable];
     [self loadXiaoHuaWithPage:1];
 }
@@ -66,7 +69,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     XiaoHuaModel * xiaohua = [_xiaoHuaArray objectAtIndex:indexPath.row];
-    return [xiaohua getCellHeight];
+    return [xiaohua getCellHeight]+50;
+//    return 394;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -76,8 +80,20 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone ;
     }
     XiaoHuaModel * xiaohua = [_xiaoHuaArray objectAtIndex:indexPath.row];
-//    cell. = [xiaohua.XH_content isKindOfClass:[NSNull class]]?@"笑话博览":xiaohua.XH_content;
+    [cell setXiaoHuaContent:xiaohua.XH_content];
+    if (![xiaohua.XH_picture_url isKindOfClass:[NSNull class]]) {
+        [cell.XH_picture sd_setImageWithURL:[NSURL URLWithString:xiaohua.XH_picture_url]];
+    }else{
+        cell.XH_picture.image = nil;
+    }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([_xiaoHuaArray count]-indexPath.row==2) {
+        _page = _page + 1;
+        [self loadXiaoHuaWithPage:_page];
+    }
 }
 
 - (void)didReceiveMemoryWarning

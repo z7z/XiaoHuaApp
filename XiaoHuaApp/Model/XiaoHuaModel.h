@@ -22,6 +22,10 @@
 @property (nonatomic,copy) NSString * XH_user_name;
 @property (nonatomic,copy) NSString * XH_user_avatar_url;
 
+
 -(NSInteger)getCellHeight;
+-(NSInteger)getContentHeight;
+
+
 
 @end
